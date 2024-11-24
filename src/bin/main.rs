@@ -66,11 +66,11 @@ async fn main(spawner: Spawner) {
             ..Config::default()
         },
     )
-    .with_sck(sclk)
-    .with_mosi(mosi)
-    .with_miso(miso)
-    .with_cs(cs)
-    .into_async();
+        .with_sck(sclk)
+        .with_mosi(mosi)
+        .with_miso(miso)
+        .with_cs(cs)
+        .into_async();
 
     // let mut noop: [u8; 2] = [Register::Noop.into(); 2];
 
@@ -123,25 +123,65 @@ async fn main(spawner: Spawner) {
         let bit = i % 8;
         info!("{:b} | {:b}", i, bit);
 
-        let buf: [u8; 2] = [Register::Digit0.into(), 1 << bit];
+
+        let buf: [u8; 2] = [Register::Digit0.into(), 0x00];
         spi_async.write_bytes(&buf).unwrap();
-        let buf: [u8; 2] = [Register::Digit0.into(), 1 << bit];
         spi_async.write_bytes(&buf).unwrap();
-        let buf: [u8; 2] = [Register::Digit0.into(), 1 << bit];
         spi_async.write_bytes(&buf).unwrap();
-        let buf: [u8; 2] = [Register::Digit0.into(), 1 << bit];
+        spi_async.write_bytes(&buf).unwrap();
+
+        let buf: [u8; 2] = [Register::Digit1.into(), 0b00011000];
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+
+        let buf: [u8; 2] = [Register::Digit2.into(), 0b00111100];
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+
+        let buf: [u8; 2] = [Register::Digit3.into(), 0b01111110];
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+
+        let buf: [u8; 2] = [Register::Digit4.into(), 0xFF];
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+
+        let buf: [u8; 2] = [Register::Digit5.into(), 0xFF];
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+
+        let buf: [u8; 2] = [Register::Digit6.into(), 0b01100110];
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+
+        let buf: [u8; 2] = [Register::Digit7.into(), 0x00];
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
+        spi_async.write_bytes(&buf).unwrap();
         spi_async.write_bytes(&buf).unwrap();
 
         // Timer::after(Duration::from_millis(1000)).await;
 
-        let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
-        spi_async.write_bytes(&buf).unwrap();
-        let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
-        spi_async.write_bytes(&buf).unwrap();
-        let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
-        spi_async.write_bytes(&buf).unwrap();
-        let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
-        spi_async.write_bytes(&buf).unwrap();
+        // let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
+        // spi_async.write_bytes(&buf).unwrap();
+        // let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
+        // spi_async.write_bytes(&buf).unwrap();
+        // let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
+        // spi_async.write_bytes(&buf).unwrap();
+        // let buf: [u8; 2] = [Register::Digit1.into(), 1 << bit];
+        // spi_async.write_bytes(&buf).unwrap();
 
         // let mut buf: [u8; 2] = [Register::DecodeMode.into(), 0x07, Register::Noop.into(), Register::Noop.into(), Register::Noop.into()];
         // spi_async.write_bytes(&mut buf).unwrap();
